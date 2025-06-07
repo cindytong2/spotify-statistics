@@ -6,7 +6,7 @@ import { ThemeProvider } from "next-themes"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Vibescape - Your Music, Visualized",
+  title: "Title [TBD] - Your Music, Visualized",
   description: "Discover insights about your listening habits with beautiful visualizations",
 }
 

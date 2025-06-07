@@ -2,7 +2,6 @@
 import { motion } from "framer-motion"
 import { ChevronRight, Share2, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import TopArtists from "@/components/top-artists"
@@ -12,53 +11,30 @@ import HiddenGems from "@/components/hidden-gems"
 import ShareRecap from "@/components/share-recap"
 
 export default function Home() {
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down
-        setIsHeaderVisible(false)
-      } else {
-        // Scrolling up
-        setIsHeaderVisible(true)
-      }
-      
-      setLastScrollY(currentScrollY)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
-  
-  useEffect(() => {
-    const header = document.getElementById('main-header')
-    if (header) {
-      header.style.transform = isHeaderVisible ? 'translateY(0)' : 'translateY(-100%)'
-    }
-  }, [isHeaderVisible])
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
-      <header className="fixed top-0 left-0 right-0 z-50 transition-transform duration-300 transform-gpu" id="main-header">
-        <div className="backdrop-blur-lg bg-slate-900/95 border-b border-slate-800/50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl transition-all duration-300" id="main-header">
+        <div className="backdrop-blur-xl bg-slate-900/80 border border-slate-800/30 rounded-xl shadow-2xl shadow-black/20">
+          <div className="px-6 py-3">
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center shadow-lg shadow-green-500/20">
+                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center shadow-lg shadow-green-500/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                  </svg>
                 </div>
-                <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-teal-400">Logo and Title [TBD]</span>
+                <span className="font-bold text-xl text-white">Logo and Title [TBD]</span>
               </div>
-              <nav className="flex items-center gap-3">
-                <Button variant="ghost" size="sm" className="text-slate-300 hover:text-white hover:bg-slate-800/50">
-                  Login
-                </Button>
+              <nav className="flex items-center gap-2">
                 <Button 
                   size="sm" 
-                  className="relative overflow-hidden group bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium px-6 hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300"
+                  className="relative overflow-hidden group h-9 pl-4 pr-6 rounded-lg bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300 flex items-center gap-2"
                 >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.48.66.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.6-1.559.3z"/>
+                  </svg>
                   <span className="relative z-10">Connect Spotify</span>
                   <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </Button>
@@ -67,7 +43,7 @@ export default function Home() {
           </div>
         </div>
       </header>
-      <div className="h-16"></div>
+      <div className="h-24"></div>
       <main className="flex-1">
         <section className="relative py-16 md:py-28 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
