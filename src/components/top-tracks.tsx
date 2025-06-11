@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { ExternalLink, Heart, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 
 export default function TopTracks() {
@@ -112,7 +112,7 @@ export default function TopTracks() {
         </Card>
 
         <motion.div variants={container} initial="hidden" animate="show" className="space-y-2">
-          {tracks.slice(1).map((track, index) => (
+          {tracks.slice(1).map((track) => (
             <motion.div key={track.id} variants={item}>
               <Card className="bg-zinc-800/30 border-zinc-700">
                 <CardContent className="p-3">
