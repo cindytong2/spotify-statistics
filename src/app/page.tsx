@@ -12,43 +12,50 @@ import ShareRecap from "@/components/share-recap"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
-      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl transition-all duration-300" id="main-header">
-        <div className="backdrop-blur-xl bg-slate-900/80 border border-slate-800/30 rounded-xl shadow-2xl shadow-black/20">
-          <div className="px-6 py-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center shadow-lg shadow-green-500/20">
+    <div className="min-h-screen bg-gradient-to-br from-[hsl(260,20%,6%)] via-[hsl(260,22%,8%)] to-[hsl(260,20%,6%)] text-white">
+      {/* Header */}
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 bg-[hsl(260,20%,10%,0.95)] backdrop-blur-md border border-[hsl(260,15%,20%,0.5)] rounded-xl shadow-2xl shadow-[hsl(260,20%,5%,0.3)] w-[calc(100%-3rem)] max-w-7xl">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[hsl(263,83%,60%)] to-[hsl(263,83%,70%)] flex items-center justify-center shadow-lg shadow-purple-500/20">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                     <path d="M9 18V5l12-2v13"></path>
                     <circle cx="6" cy="18" r="3"></circle>
                     <circle cx="18" cy="16" r="3"></circle>
                   </svg>
                 </div>
-                <span className="font-bold text-xl text-white">Logo and Title [TBD]</span>
+                <span className="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-[hsl(263,83%,70%)] to-[hsl(263,83%,80%)]">Rebeat</span>
               </div>
-              <nav className="flex items-center gap-2">
-                <Button 
-                  size="sm" 
-                  className="relative overflow-hidden group h-9 pl-4 pr-6 rounded-lg bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300 flex items-center gap-2"
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.48.66.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.6-1.559.3z"/>
-                  </svg>
-                  <span className="relative z-10">Connect Spotify</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                </Button>
-              </nav>
             </div>
-          </div>
+            <Button 
+              size="sm" 
+              className="relative overflow-hidden group h-9 pl-5 pr-6 rounded-xl bg-gradient-to-r from-[hsl(263,83%,60%)] to-[hsl(263,83%,70%)] text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 flex items-center gap-2 hover:scale-[1.02] active:scale-95"
+            >
+              <div className="relative z-10 flex items-center gap-2">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.48.66.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                  </svg>
+                  <span>Connect Spotify</span>
+                </div>
+                <span className="absolute inset-0 bg-gradient-to-r from-[hsl(263,83%,70%)] to-[hsl(263,83%,80%)] opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
+              </Button>   
+            </div>
         </div>
       </header>
       <div className="h-24"></div>
       <main className="flex-1">
         <section className="relative py-16 md:py-28 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-1/2 left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-500/5 via-slate-900 to-slate-950 -translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-stripes.png')] opacity-5"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[hsl(260,20%,6%)] via-[hsl(260,25%,8%)] to-[hsl(260,30%,10%)]">
+              <div className="absolute inset-0 opacity-20" style={{
+                backgroundImage: 'radial-gradient(circle at 25% 25%, hsl(263,83%,60%,0.1) 0%, transparent 40%), radial-gradient(circle at 75% 75%, hsl(167,94%,43%,0.1) 0%, transparent 40%)',
+                backgroundSize: '100% 100%',
+                backgroundPosition: 'center',
+              }}></div>
+            </div>
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-stripes.png')] opacity-[0.02]"></div>
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -58,49 +65,69 @@ export default function Home() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-4xl mx-auto text-center"
             >
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 mb-6">
-                <span className="h-2 w-2 rounded-full bg-gradient-to-r from-green-400 to-teal-500 animate-pulse mr-2"></span>
-                <span className="text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-teal-400">Now Playing: Your Music Journey</span>
-              </div>
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="inline-flex items-center px-4 py-2 rounded-full bg-[hsl(260,15%,15%)] border border-[hsl(260,15%,20%)] mb-6 backdrop-blur-sm"
+              >
+                <span className="h-2 w-2 rounded-full bg-[hsl(167,94%,43%)] animate-pulse mr-2"></span>
+                <span className="text-sm font-medium text-[hsl(260,10%,80%)]">Now Playing: Your Music Journey</span>
+              </motion.div>
               
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-300">
-                Your Music, <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-teal-400 to-cyan-400 animate-gradient">Visualized</span>
-              </h1>
+              <motion.h1 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="text-5xl md:text-7xl font-bold tracking-tight mb-6"
+              >
+                <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-[hsl(260,10%,90%)] block">
+                  Your Music, 
+                </span>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[hsl(263,83%,70%)] via-[hsl(263,83%,65%)] to-[hsl(263,83%,60%)] animate-gradient">
+                  Visualized
+                </span>
+              </motion.h1>
               
               <motion.p 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="text-xl md:text-2xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="text-xl md:text-2xl text-[hsl(260,10%,70%)] mb-10 max-w-2xl mx-auto leading-relaxed"
               >
-                Discover insights about your Spotify listening habits.
+                Discover insights about your Spotify listening habits with beautiful, shareable visualizations.
               </motion.p>
               
               <motion.div 
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
                 className="flex flex-col sm:flex-row gap-4 justify-center"
               >
                 <Button 
                   size="lg" 
-                  className="relative overflow-hidden group bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium px-8 py-6 text-base hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300"
+                  className="relative overflow-hidden group h-12 px-8 rounded-xl bg-gradient-to-r from-[hsl(263,83%,60%)] to-[hsl(263,83%,70%)] text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 hover:scale-[1.02] active:scale-95"
                 >
-                  <span className="relative z-10 flex items-center">
-                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                  <div className="relative z-10 flex items-center gap-2">
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.48.66.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
                     </svg>
-                    Connect Spotify
-                  </span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <span>Connect Spotify</span>
+                  </div>
+                  <span className="absolute inset-0 bg-gradient-to-r from-[hsl(263,83%,70%)] to-[hsl(263,83%,80%)] opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
                 </Button>
                 
                 <Button 
-                  size="lg" 
                   variant="outline" 
-                  className="border-slate-700 bg-slate-900/50 text-slate-300 hover:bg-slate-800/50 hover:text-white hover:border-slate-600 transition-colors duration-300 px-8 py-6 text-base"
+                  size="lg" 
+                  className="h-12 px-8 rounded-xl border-[hsl(260,15%,25%)] text-[hsl(260,10%,80%)] hover:bg-[hsl(260,15%,15%)] hover:text-white hover:border-[hsl(260,15%,30%)] transition-all duration-300 hover:scale-[1.02] active:scale-95 group"
                 >
-                  See Demo
+                  <span className="relative z-10 flex items-center gap-2">
+                    <svg className="w-5 h-5 text-[hsl(260,10%,60%)] group-hover:text-[hsl(260,10%,80%)] transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    <span>See Demo</span>
+                  </span>
                 </Button>
               </motion.div>
               
@@ -108,19 +135,19 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-16 relative"
+                className="mt-16 relative group"
               >
-                <div className="absolute -inset-4 bg-gradient-to-r from-green-500/20 to-teal-500/20 rounded-2xl blur-2xl opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-                <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800/50 rounded-xl p-1">
-                  <div className="h-64 md:h-80 bg-slate-800/30 rounded-lg flex items-center justify-center">
+                <div className="absolute -inset-4 bg-gradient-to-r from-[hsl(263,83%,60%,0.2)] to-[hsl(263,83%,70%,0.2)] rounded-2xl blur-2xl opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                <div className="relative bg-[hsl(260,15%,10%,0.8)] backdrop-blur-sm border border-[hsl(260,15%,20%,0.5)] rounded-xl p-1">
+                  <div className="h-64 md:h-80 bg-[hsl(260,15%,15%,0.3)] rounded-lg flex items-center justify-center">
                     <div className="text-center p-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-[hsl(263,83%,60%)] to-[hsl(263,83%,70%)] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/20">
                         <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
                         </svg>
                       </div>
-                      <h3 className="text-xl font-semibold text-white mb-2">Your Music Awaits</h3>
-                      <p className="text-slate-400 text-sm max-w-xs mx-auto">Connect your Spotify account to unlock personalized insights</p>
+                      <h3 className="text-2xl font-semibold text-white mb-2">Your Music Awaits</h3>
+                      <p className="text-[hsl(260,10%,70%)] text-sm max-w-xs mx-auto">Connect your Spotify account to unlock personalized insights</p>
                     </div>
                   </div>
                 </div>
@@ -130,94 +157,137 @@ export default function Home() {
         </section>
 
         <section className="py-16 md:py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 to-slate-950/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(260,20%,6%,0.5)] to-[hsl(260,25%,8%,0.8)]"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <Tabs defaultValue="top-tracks" className="w-full">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300 mb-1">Your Music Stats</h2>
-                  <p className="text-slate-400">Explore your listening history and discover insights</p>
+                  <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-[hsl(260,10%,90%)] mb-1">Your Music Stats</h2>
+                  <p className="text-[hsl(260,10%,70%)]">Explore your listening history and discover insights</p>
                 </div>
-                <TabsList className="bg-slate-800/30 backdrop-blur-md border border-slate-700/50 p-1.5 rounded-xl w-full md:w-auto">
+                <TabsList className="bg-[hsl(260,15%,15%,0.3)] backdrop-blur-md border border-[hsl(260,15%,25%,0.5)] p-1.5 rounded-xl w-full md:w-auto">
                   <TabsTrigger 
                     value="top-tracks"
-                    className="px-4 py-2 text-sm font-medium rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500/10 data-[state=active]:to-teal-500/10 data-[state=active]:text-green-400 data-[state=active]:border data-[state=active]:border-green-500/20"
+                    className="px-4 py-2 text-sm font-medium rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[hsl(263,83%,60%,0.1)] data-[state=active]:to-[hsl(263,83%,70%,0.1)] data-[state=active]:text-[hsl(263,83%,70%)] data-[state=active]:border data-[state=active]:border-[hsl(263,83%,60%,0.2)] transition-all duration-200"
                   >
                     Top Tracks
                   </TabsTrigger>
                   <TabsTrigger 
                     value="top-artists"
-                    className="px-4 py-2 text-sm font-medium rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500/10 data-[state=active]:to-teal-500/10 data-[state=active]:text-green-400 data-[state=active]:border data-[state=active]:border-green-500/20"
+                    className="px-4 py-2 text-sm font-medium rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[hsl(263,83%,60%,0.1)] data-[state=active]:to-[hsl(263,83%,70%,0.1)] data-[state=active]:text-[hsl(263,83%,70%)] data-[state=active]:border data-[state=active]:border-[hsl(263,83%,60%,0.2)] transition-all duration-200"
                   >
                     Top Artists
                   </TabsTrigger>
                   <TabsTrigger 
-                    value="mood"
-                    className="px-4 py-2 text-sm font-medium rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500/10 data-[state=active]:to-teal-500/10 data-[state=active]:text-green-400 data-[state=active]:border data-[state=active]:border-green-500/20"
+                    value="mood-board"
+                    className="px-4 py-2 text-sm font-medium rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[hsl(263,83%,60%,0.1)] data-[state=active]:to-[hsl(263,83%,70%,0.1)] data-[state=active]:text-[hsl(263,83%,70%)] data-[state=active]:border data-[state=active]:border-[hsl(263,83%,60%,0.2)] transition-all duration-200"
                   >
                     Mood Board
                   </TabsTrigger>
                   <TabsTrigger 
-                    value="gems"
-                    className="px-4 py-2 text-sm font-medium rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500/10 data-[state=active]:to-teal-500/10 data-[state=active]:text-green-400 data-[state=active]:border data-[state=active]:border-green-500/20"
+                    value="hidden-gems"
+                    className="px-4 py-2 text-sm font-medium rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[hsl(263,83%,60%,0.1)] data-[state=active]:to-[hsl(263,83%,70%,0.1)] data-[state=active]:text-[hsl(263,83%,70%)] data-[state=active]:border data-[state=active]:border-[hsl(263,83%,60%,0.2)] transition-all duration-200"
                   >
                     Hidden Gems
                   </TabsTrigger>
                 </TabsList>
               </div>
 
-              <TabsContent value="top-tracks" className="mt-0">
-                <TopTracks />
+              <TabsContent value="top-tracks" className="mt-8">
+                <Card className="bg-[hsl(260,15%,10%,0.5)] backdrop-blur-sm border border-[hsl(260,15%,20%,0.5)] overflow-hidden transition-all duration-300 hover:border-[hsl(263,83%,60%,0.3)] hover:shadow-lg hover:shadow-purple-500/10">
+                  <CardContent className="p-6">
+                    <TopTracks />
+                  </CardContent>
+                </Card>
               </TabsContent>
 
-              <TabsContent value="top-artists" className="mt-0">
-                <TopArtists />
+              <TabsContent value="top-artists" className="mt-8">
+                <Card className="bg-[hsl(260,15%,10%,0.5)] backdrop-blur-sm border border-[hsl(260,15%,20%,0.5)] overflow-hidden transition-all duration-300 hover:border-[hsl(263,83%,60%,0.3)] hover:shadow-lg hover:shadow-purple-500/10">
+                  <CardContent className="p-6">
+                    <TopArtists />
+                  </CardContent>
+                </Card>
               </TabsContent>
 
-              <TabsContent value="mood" className="mt-0">
-                <MoodBoard />
+              <TabsContent value="mood-board" className="mt-8">
+                <Card className="bg-[hsl(260,15%,10%,0.5)] backdrop-blur-sm border border-[hsl(260,15%,20%,0.5)] overflow-hidden transition-all duration-300 hover:border-[hsl(263,83%,60%,0.3)] hover:shadow-lg hover:shadow-purple-500/10">
+                  <CardContent className="p-6">
+                    <MoodBoard />
+                  </CardContent>
+                </Card>
               </TabsContent>
 
-              <TabsContent value="gems" className="mt-0">
-                <HiddenGems />
+              <TabsContent value="hidden-gems" className="mt-8">
+                <Card className="bg-[hsl(260,15%,10%,0.5)] backdrop-blur-sm border border-[hsl(260,15%,20%,0.5)] overflow-hidden transition-all duration-300 hover:border-[hsl(263,83%,60%,0.3)] hover:shadow-lg hover:shadow-purple-500/10">
+                  <CardContent className="p-6">
+                    <HiddenGems />
+                  </CardContent>
+                </Card>
               </TabsContent>
             </Tabs>
           </div>
         </section>
 
+        {/* Share Your Stats Section */}
         <section className="py-16 md:py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 to-slate-950"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(260,25%,8%)] to-[hsl(260,20%,6%)]">
+            <div className="absolute inset-0 opacity-20" style={{
+              backgroundImage: 'radial-gradient(circle at 25% 25%, hsl(263,83%,60%,0.03) 0%, transparent 50%), radial-gradient(circle at 75% 75%, hsl(263,83%,60%,0.03) 0%, transparent 50%)',
+              backgroundSize: '100% 100%',
+              backgroundPosition: 'center',
+            }}></div>
+          </div>
+          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="max-w-5xl mx-auto grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-              <div className="relative">
-                <div className="absolute -top-6 -left-6 w-32 h-32 bg-teal-500/10 rounded-full filter blur-3xl -z-10"></div>
-                <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-green-500/10 rounded-full filter blur-3xl -z-10"></div>
-                
-                <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300 mb-4">
-                  Share Your Music Personality
-                </h2>
-                <p className="text-lg text-slate-400 mb-8 leading-relaxed">
-                  Generate beautiful, shareable cards that showcase your unique music taste and listening habits in detail.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    className="group relative overflow-hidden bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium px-6 py-6 text-base hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300"
-                  >
-                    <span className="relative z-10 flex items-center">
-                      <Share2 className="mr-2 h-5 w-5" />
-                      Create Shareable Recap
-                    </span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                  </Button>
-                  <div className="flex items-center text-teal-400 group cursor-pointer">
-                    <span className="text-sm font-medium group-hover:text-teal-300 transition-colors">See examples</span>
-                    <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-[hsl(260,10%,90%)] mb-4">
+                Share Your Music Personality
+              </h2>
+              <p className="text-lg text-[hsl(260,10%,70%)] max-w-2xl mx-auto">
+                Generate beautiful, shareable cards that showcase your unique music taste and listening habits.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(263,83%,60%)] to-[hsl(263,83%,70%)] flex items-center justify-center flex-shrink-0 shadow-lg shadow-purple-500/20">
+                      <Share2 className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white mb-1">Weekly Recap</h3>
+                      <p className="text-[hsl(260,10%,70%)]">Share your weekly listening stats with friends and followers</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(300,83%,60%)] to-[hsl(270,83%,60%)] flex items-center justify-center flex-shrink-0 shadow-lg shadow-purple-500/20">
+                      <Sparkles className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white mb-1">Top Picks</h3>
+                      <p className="text-[hsl(260,10%,70%)]">Showcase your top artists and tracks in a stunning visual</p>
+                    </div>
+                  </div>
+                  
+                  <div className="pt-4">
+                    <Button 
+                      className="group relative overflow-hidden bg-gradient-to-r from-[hsl(263,83%,60%)] to-[hsl(263,83%,70%)] text-white font-medium px-6 py-6 text-base hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+                    >
+                      <span className="relative z-10 flex items-center">
+                        <Share2 className="mr-2 h-5 w-5" />
+                        Create Shareable Recap
+                      </span>
+                      <span className="absolute inset-0 bg-gradient-to-r from-[hsl(263,83%,70%)] to-[hsl(263,83%,80%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    </Button>
                   </div>
                 </div>
               </div>
+              
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-green-500/10 to-teal-500/10 rounded-2xl blur-2xl opacity-70 -z-10"></div>
-                <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800/50 rounded-2xl p-1.5 overflow-hidden">
+                <div className="absolute -inset-4 bg-gradient-to-r from-[hsl(263,83%,60%,0.1)] to-[hsl(263,83%,70%,0.1)] rounded-2xl blur-2xl opacity-70 -z-10"></div>
+                <div className="relative bg-[hsl(260,15%,10%,0.5)] backdrop-blur-sm border border-[hsl(260,15%,20%,0.5)] rounded-2xl p-1.5 overflow-hidden">
                   <ShareRecap />
                 </div>
               </div>
@@ -225,74 +295,74 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950 to-slate-950/80"></div>
+        {/* Find Your New Favorites Section */}
+        <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-[hsl(260,20%,6%)] to-[hsl(260,25%,8%)]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="max-w-5xl mx-auto grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-              <div className="order-2 lg:order-1">
-                <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300 mb-4">
-                  Find Your New Favorites
-                </h2>
-                <p className="text-lg text-slate-400 mb-8 leading-relaxed">
-                  Discover hidden gems and personalized recommendations based on your unique listening history and preferences.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    className="group relative overflow-hidden bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium px-6 py-6 text-base hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300"
-                  >
-                    <span className="relative z-10 flex items-center">
-                      <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-                      </svg>
-                      Get Recommendations
-                    </span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-green-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                  </Button>
-                  <div className="flex items-center text-teal-400 group cursor-pointer">
-                    <span className="text-sm font-medium group-hover:text-teal-300 transition-colors">Browse more</span>
-                    <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </div>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-[hsl(260,10%,90%)] mb-4">
+                Find Your New Favorites
+              </h2>
+              <p className="text-lg text-[hsl(260,10%,70%)] max-w-2xl mx-auto mb-8">
+                Discover hidden gems and personalized recommendations based on your unique listening history and preferences.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button 
+                  className="group relative overflow-hidden bg-gradient-to-r from-[hsl(263,83%,60%)] to-[hsl(263,83%,70%)] text-white font-medium px-6 py-6 text-base hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+                >
+                  <span className="relative z-10 flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                    </svg>
+                    Get Recommendations
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-[hsl(263,83%,70%)] to-[hsl(263,83%,80%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                </Button>
+                <div className="flex items-center text-[hsl(263,83%,70%)] group cursor-pointer">
+                  <span className="text-sm font-medium group-hover:text-[hsl(263,83%,80%)] transition-colors">Browse more</span>
+                  <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4 order-1 lg:order-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <motion.div 
-                    key={i}
-                    whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                    className="group"
-                  >
-                    <Card className="bg-slate-900/80 backdrop-blur-sm border border-slate-800/50 overflow-hidden transition-all duration-300 group-hover:border-teal-500/30 group-hover:shadow-lg group-hover:shadow-teal-500/10">
-                      <div className="aspect-square bg-gradient-to-br from-slate-800/50 to-slate-900/70 relative overflow-hidden">
-                        <div className="absolute inset-0 flex items-center justify-center p-2">
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div className="w-12 h-12 rounded-full bg-teal-500/90 flex items-center justify-center transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                              </svg>
-                            </div>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+              {[1, 2, 3, 4].map((i) => (
+                <motion.div 
+                  key={i}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  className="group"
+                >
+                  <Card className="bg-[hsl(260,15%,10%,0.5)] backdrop-blur-sm border border-[hsl(260,15%,20%,0.5)] overflow-hidden transition-all duration-300 group-hover:border-[hsl(263,83%,60%,0.3)] group-hover:shadow-lg group-hover:shadow-purple-500/10">
+                    <div className="aspect-square bg-gradient-to-br from-[hsl(260,15%,15%,0.5)] to-[hsl(260,15%,10%,0.7)] relative overflow-hidden">
+                      <div className="absolute inset-0 flex items-center justify-center p-2">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="w-12 h-12 rounded-full bg-[hsl(263,83%,60%)] flex items-center justify-center transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                            </svg>
                           </div>
-                          <img
-                            src={`/placeholder.svg?height=300&width=300&text=Album+${i}`}
-                            alt={`Album ${i}`}
-                            className="w-full h-full object-cover rounded-sm transition-transform duration-500 group-hover:scale-105"
-                            width={300}
-                            height={300}
-                          />
                         </div>
+                        <img
+                          src={`/placeholder.svg?height=300&width=300&text=Album+${i}`}
+                          alt={`Album ${i}`}
+                          className="w-full h-full object-cover rounded-sm transition-transform duration-500 group-hover:scale-105"
+                          width={300}
+                          height={300}
+                        />
                       </div>
-                      <CardContent className="p-4">
-                        <h3 className="font-semibold text-white group-hover:text-teal-400 transition-colors">Album Title {i}</h3>
-                        <p className="text-sm text-slate-400 group-hover:text-teal-300 transition-colors">Artist Name</p>
-                        <div className="flex items-center mt-2">
-                          <span className="text-xs px-2 py-1 bg-slate-800/50 rounded-full text-slate-300">
-                            {['Pop', 'Indie', 'Electronic'][i % 3]}
-                          </span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-white group-hover:text-[hsl(263,83%,70%)] transition-colors">Album Title {i}</h3>
+                      <p className="text-sm text-[hsl(260,10%,70%)] group-hover:text-[hsl(263,83%,80%)] transition-colors">Artist Name</p>
+                      <div className="flex items-center mt-2">
+                        <span className="text-xs px-2 py-1 bg-[hsl(260,15%,15%)] rounded-full text-[hsl(260,10%,80%)]">
+                          {['Pop', 'Indie', 'Electronic'][i % 3]}
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>

@@ -123,9 +123,42 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+    -webkit-tap-highlight-color: transparent;
   }
+  
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    background-color: hsl(260, 20%, 6%);
+    background-image: 
+      radial-gradient(at 80% 20%, hsla(263, 83%, 60%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 20% 80%, hsla(167, 94%, 43%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 0%, hsla(260, 22%, 9%, 1) 0px, transparent 50%);
+    min-height: 100vh;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(260, 15%, 10%);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(260, 15%, 25%);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(260, 15%, 35%);
+  }
+  
+  /* Selection Styling */
+  ::selection {
+    background: hsl(263, 83%, 60%);
+    color: white;
   }
 }
