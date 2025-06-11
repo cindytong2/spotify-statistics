@@ -5,6 +5,7 @@ import { Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import Image from "next/image"
 
 export default function MoodBoard() {
   // Mock data - in a real app, this would come from the Spotify API analysis
@@ -147,10 +148,12 @@ export default function MoodBoard() {
               >
                 <Card className="bg-zinc-800/30 border-zinc-700 overflow-hidden h-full">
                   <div className="aspect-square relative">
-                    <img
+                    <Image
                       src={track.image || "/placeholder.svg"}
-                      alt={track.name}
-                      className="w-full h-full object-cover"
+                      alt={`${track.name} cover`}
+                      fill
+                      className="object-cover"
+                      unoptimized={process.env.NODE_ENV !== 'production'}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-3">
                       <div className="text-xs font-medium bg-green-500/90 text-white rounded-full px-2 py-0.5 w-fit mb-1">

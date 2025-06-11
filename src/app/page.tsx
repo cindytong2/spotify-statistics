@@ -4,6 +4,8 @@ import { ChevronRight, Share2, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+import Image from "next/image"
 import TopArtists from "@/components/top-artists"
 import TopTracks from "@/components/top-tracks"
 import MoodBoard from "@/components/mood-board"
@@ -342,13 +344,15 @@ export default function Home() {
                             </svg>
                           </div>
                         </div>
-                        <img
-                          src={`/placeholder.svg?height=300&width=300&text=Album+${i}`}
-                          alt={`Album ${i}`}
-                          className="w-full h-full object-cover rounded-sm transition-transform duration-500 group-hover:scale-105"
-                          width={300}
-                          height={300}
-                        />
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={`/placeholder.svg?height=300&width=300&text=Album+${i}`}
+                            alt={`Album ${i}`}
+                            fill
+                            className="object-cover rounded-sm transition-transform duration-500 group-hover:scale-105"
+                            unoptimized={process.env.NODE_ENV !== 'production'}
+                          />
+                        </div>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -371,7 +375,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center gap-6">
             <p className="text-zinc-400 text-sm max-w-2xl">
-              This app uses Spotify's API but is not endorsed, certified, or otherwise approved by Spotify.
+              This app uses Spotify&apos;s API but is not endorsed, certified, or otherwise approved by Spotify.
             </p>
           </div>
         </div>

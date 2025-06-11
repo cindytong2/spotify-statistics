@@ -5,7 +5,8 @@ import { motion } from "framer-motion"
 import { ExternalLink, Heart, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Image from "next/image"
 
 export default function TopTracks() {
   const [timeRange, setTimeRange] = useState("short_term")
@@ -85,10 +86,12 @@ export default function TopTracks() {
       <div className="grid gap-8 md:grid-cols-2">
         <Card className="bg-zinc-800/30 border-zinc-700 overflow-hidden">
           <div className="aspect-square relative">
-            <img
+            <Image
               src={tracks[0].image || "/placeholder.svg"}
-              alt={tracks[0].album}
-              className="w-full h-full object-cover"
+              alt={`${tracks[0].album} cover`}
+              fill
+              className="object-cover"
+              unoptimized={process.env.NODE_ENV !== 'production'}
             />
             <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-6">
               <h4 className="text-3xl font-bold mb-1">{tracks[0].name}</h4>
@@ -114,11 +117,13 @@ export default function TopTracks() {
               <Card className="bg-zinc-800/30 border-zinc-700">
                 <CardContent className="p-3">
                   <div className="flex items-center gap-3">
-                    <div className="relative w-12 h-12 flex-shrink-0">
-                      <img
+                    <div className="flex-shrink-0 relative w-12 h-12">
+                      <Image
                         src={track.image || "/placeholder.svg"}
-                        alt={track.album}
-                        className="w-full h-full object-cover rounded"
+                        alt={`${track.album} cover`}
+                        fill
+                        className="object-cover rounded"
+                        unoptimized={process.env.NODE_ENV !== 'production'}
                       />
                       <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity rounded">
                         <Play className="h-5 w-5" />

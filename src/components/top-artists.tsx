@@ -6,6 +6,7 @@ import { ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Image from "next/image"
 
 export default function TopArtists() {
   const [timeRange, setTimeRange] = useState("short_term")
@@ -73,10 +74,12 @@ export default function TopArtists() {
           >
             <Card className="bg-zinc-800/30 border-zinc-700 overflow-hidden h-full">
               <div className="aspect-square relative">
-                <img
+                <Image
                   src={artist.image || "/placeholder.svg"}
-                  alt={artist.name}
-                  className="w-full h-full object-cover"
+                  alt={`${artist.name} profile`}
+                  fill
+                  className="object-cover"
+                  unoptimized={process.env.NODE_ENV !== 'production'}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-4">
                   <div className="text-xs font-medium bg-green-500/90 text-white rounded-full px-2 py-1 w-fit mb-2">

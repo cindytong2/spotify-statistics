@@ -5,7 +5,8 @@ import { motion } from "framer-motion"
 import { Download, Share2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Image from "next/image"
 
 export default function ShareRecap() {
   const [template, setTemplate] = useState("spotify")
@@ -153,12 +154,16 @@ export default function ShareRecap() {
                   <h4 className="text-lg font-semibold text-white mb-3">Top Artists</h4>
                   <div className="grid grid-cols-3 gap-2">
                     {[1, 2, 3, 4, 5, 6].map((i) => (
-                      <div key={i} className="aspect-square bg-white/20 rounded-lg overflow-hidden">
-                        <img
-                          src={`/placeholder.svg?height=100&width=100&text=Artist+${i}`}
-                          alt={`Artist ${i}`}
-                          className="w-full h-full object-cover"
-                        />
+                      <div key={`artist-${i}`} className="aspect-square bg-white/20 rounded-lg overflow-hidden">
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={`/placeholder.svg?height=100&width=100&text=Artist+${i}`}
+                            alt={`Artist ${i}`}
+                            fill
+                            className="object-cover"
+                            unoptimized={process.env.NODE_ENV !== 'production'}
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -170,11 +175,15 @@ export default function ShareRecap() {
                     {[1, 2, 3].map((i) => (
                       <div key={i} className="flex items-center gap-3">
                         <div className="w-12 h-12 bg-white/20 rounded overflow-hidden flex-shrink-0">
-                          <img
-                            src={`/placeholder.svg?height=100&width=100&text=Album+${i}`}
-                            alt={`Album ${i}`}
-                            className="w-full h-full object-cover"
-                          />
+                          <div className="relative w-full h-full">
+                            <Image
+                              src={`/placeholder.svg?height=100&width=100&text=Album+${i}`}
+                              alt={`Album ${i}`}
+                              fill
+                              className="object-cover"
+                              unoptimized={process.env.NODE_ENV !== 'production'}
+                            />
+                          </div>
                         </div>
                         <div className="text-white">
                           <div className="font-medium">Track {i}</div>

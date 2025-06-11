@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ExternalLink, Play, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import NextImage from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
@@ -89,11 +90,15 @@ export default function HiddenGems() {
                 >
                   <Card className="bg-zinc-800/50 border-zinc-700 overflow-hidden">
                     <div className="aspect-square relative">
-                      <img
-                        src={gem.image || "/placeholder.svg"}
-                        alt={gem.album}
-                        className="w-full h-full object-cover"
-                      />
+                      <div className="relative w-full h-full">
+                        <NextImage
+                          src={gem.image}
+                          alt={`${gem.album} cover`}
+                          fill
+                          className="object-cover"
+                          unoptimized={process.env.NODE_ENV !== 'production'}
+                        />
+                      </div>
                       <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <Button size="icon" className="rounded-full bg-white text-black hover:bg-white/90 h-12 w-12">
                           <Play className="h-6 w-6" />
