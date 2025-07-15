@@ -3,11 +3,10 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Loader2, Music, User, Clock, ExternalLink, BarChart2, Disc, Headphones, TrendingUp, LogOut } from 'lucide-react';
+import { Loader2, Music, User, LogOut } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface Artist {
   id: string;
@@ -327,76 +326,6 @@ export default function DashboardPage() {
         </motion.header>
 
         <main className="space-y-8">
-          {/* Stats Grid */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-          >
-            <Card className="bg-[hsl(260,15%,12%,0.8)] backdrop-blur-lg border-[hsl(260,15%,20%,0.5)]">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-[hsl(260,10%,70%)]">
-                  Top Tracks
-                </CardTitle>
-                <div className="h-8 w-8 rounded-full bg-[hsl(263,83%,60%,0.2)] flex items-center justify-center">
-                  <Music className="h-4 w-4 text-[hsl(263,83%,70%)]" />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-white">{topTracks?.items?.length || 0}</div>
-                <p className="text-xs text-[hsl(260,10%,60%)]">Your favorite tracks</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-[hsl(260,15%,12%,0.8)] backdrop-blur-lg border-[hsl(260,15%,20%,0.5)]">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-[hsl(260,10%,70%)]">
-                  Top Artists
-                </CardTitle>
-                <div className="h-8 w-8 rounded-full bg-[hsl(167,94%,43%,0.2)] flex items-center justify-center">
-                  <User className="h-4 w-4 text-[hsl(167,94%,43%)]" />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-white">{topArtists?.items?.length || 0}</div>
-                <p className="text-xs text-[hsl(260,10%,60%)]">Your favorite artists</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-[hsl(260,15%,12%,0.8)] backdrop-blur-lg border-[hsl(260,15%,20%,0.5)]">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-[hsl(260,10%,70%)]">
-                  Listening Time
-                </CardTitle>
-                <div className="h-8 w-8 rounded-full bg-[hsl(263,83%,60%,0.2)] flex items-center justify-center">
-                  <Clock className="h-4 w-4 text-[hsl(263,83%,70%)]" />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-white">
-                  {Math.round(topTracks?.items?.reduce((acc, track) => acc + track.duration_ms, 0) / 3600000 * 10) / 10}h
-                </div>
-                <p className="text-xs text-[hsl(260,10%,60%)]">Total listening time</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-[hsl(260,15%,12%,0.8)] backdrop-blur-lg border-[hsl(260,15%,20%,0.5)]">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-[hsl(260,10%,70%)]">
-                  Top Genre
-                </CardTitle>
-                <div className="h-8 w-8 rounded-full bg-[hsl(167,94%,43%,0.2)] flex items-center justify-center">
-                  <Disc className="h-4 w-4 text-[hsl(167,94%,43%)]" />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-white">Pop</div>
-                <p className="text-xs text-[hsl(260,10%,60%)]">Your most listened genre</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Top Tracks */}
             <motion.div
