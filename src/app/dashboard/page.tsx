@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Loader2, Music, User, LogOut } from 'lucide-react';
+import { Loader2, Music, User, LogOut, Hash, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -13,6 +13,7 @@ interface Artist {
   name: string;
   images?: Array<{ url: string }>;
   external_urls: { spotify: string };
+  genres?: string[];
 }
 
 interface Track {
@@ -39,6 +40,12 @@ interface SpotifyData {
   topTracks: { items: Track[] };
   topArtists: { items: Artist[] };
   recentlyPlayed: { items: Array<{ track: Track; played_at: string }> };
+  secretSong?: {
+    track: Track;
+    message: string;
+    trackPosition: number;
+    totalTracks: number;
+  };
 }
 
 const formatDuration = (ms: number): string => {
@@ -71,11 +78,12 @@ export default function DashboardPage() {
   const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
   const [expandedSections, setExpandedSections] = useState({
     tracks: false,
-    artists: false
+    artists: false,
+    genres: false
   });
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const toggleSection = (section: 'tracks' | 'artists') => {
+  const toggleSection = (section: 'tracks' | 'artists' | 'genres') => {
     setExpandedSections(prev => ({
       ...prev,
       [section]: !prev[section]
@@ -107,10 +115,11 @@ export default function DashboardPage() {
         setLoading(true);
         setError(null);
         
-        const [profileRes, topTracksRes, topArtistsRes] = await Promise.all([
+        const [profileRes, topTracksRes, topArtistsRes, secretSongRes] = await Promise.all([
           fetch('/api/me'),
           fetch(`/api/me/top/tracks?limit=20&time_range=${timeRange}`),
           fetch(`/api/me/top/artists?limit=20&time_range=${timeRange}`),
+          fetch(`/api/me/secret-song?time_range=${timeRange}`).catch(() => null), // Optional, don't fail if it errors
         ]);
 
         if (!profileRes.ok || !topTracksRes.ok || !topArtistsRes.ok) {
@@ -123,11 +132,26 @@ export default function DashboardPage() {
           topArtistsRes.json(),
         ]);
 
+        // Handle secret song separately since it's optional
+        let secretSong = null;
+        if (secretSongRes && secretSongRes.ok) {
+          try {
+            const secretSongData = await secretSongRes.json();
+            secretSong = secretSongData;
+            console.log('Secret song loaded:', secretSong);
+          } catch (err) {
+            console.log('Secret song feature not available:', err);
+          }
+        } else {
+          console.log('Secret song API response:', secretSongRes?.status, secretSongRes?.statusText);
+        }
+
         setSpotifyData({
           profile,
           topTracks,
           topArtists,
           recentlyPlayed: { items: [] }, // Add empty array for type safety
+          secretSong,
         });
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -175,6 +199,21 @@ export default function DashboardPage() {
         })
         .catch(console.error);
     }
+  };
+
+  // Function to compute top genres from top artists
+  const getTopGenres = (artists: Artist[]) => {
+    const genreSet = new Set<string>();
+    
+    artists.forEach(artist => {
+      if (artist.genres) {
+        artist.genres.forEach(genre => {
+          genreSet.add(genre);
+        });
+      }
+    });
+    
+    return Array.from(genreSet).sort();
   };
 
   if (loading) {
@@ -233,7 +272,8 @@ export default function DashboardPage() {
     );
   }
 
-  const { profile, topTracks, topArtists } = spotifyData;
+  const { profile, topTracks, topArtists, secretSong } = spotifyData;
+  const topGenres = getTopGenres(topArtists?.items || []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[hsl(260,20%,6%)] via-[hsl(260,22%,8%)] to-[hsl(260,20%,6%)] p-4 sm:p-6 relative overflow-hidden">
@@ -327,69 +367,171 @@ export default function DashboardPage() {
 
         <main className="space-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Top Tracks */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <Card className="bg-[hsl(260,15%,12%,0.8)] backdrop-blur-lg border-[hsl(260,15%,20%,0.5)]">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <Music className="h-5 w-5 text-[hsl(263,83%,70%)]" />
-                      <CardTitle className="text-lg font-semibold text-white">Top Tracks</CardTitle>
+            <div className="space-y-6">
+              {/* Top Tracks */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Card className="bg-[hsl(260,15%,12%,0.8)] backdrop-blur-lg border-[hsl(260,15%,20%,0.5)]">
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <Music className="h-5 w-5 text-[hsl(263,83%,70%)]" />
+                        <CardTitle className="text-lg font-semibold text-white">Top Tracks</CardTitle>
+                      </div>
+                      <span className="text-xs text-[hsl(260,10%,60%)]">{timeRangeLabels[timeRange].display}</span>
                     </div>
-                    <span className="text-xs text-[hsl(260,10%,60%)]">{timeRangeLabels[timeRange].display}</span>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {topTracks?.items?.slice(0, expandedSections.tracks ? topTracks.items.length : 5).map((track, index) => (
-                      <div key={track.id} className="flex items-center p-2 rounded-lg hover:bg-[hsl(260,15%,20%,0.3)] transition-colors group">
-                        <div className="w-8 text-center text-[hsl(260,10%,60%)] text-sm font-medium">
-                          {index + 1}
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      {topTracks?.items?.slice(0, expandedSections.tracks ? topTracks.items.length : 5).map((track, index) => (
+                        <div key={track.id} className="flex items-center p-2 rounded-lg hover:bg-[hsl(260,15%,20%,0.3)] transition-colors group">
+                          <div className="w-8 text-center text-[hsl(260,10%,60%)] text-sm font-medium">
+                            {index + 1}
+                          </div>
+                          <div className="flex-shrink-0 ml-2 w-10 h-10 rounded overflow-hidden bg-[hsl(260,15%,15%)]">
+                            {track.album?.images?.[0]?.url ? (
+                              <Image 
+                                src={track.album.images[0].url} 
+                                alt={track.album.name}
+                                width={64}
+                                height={64}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center bg-[hsl(260,15%,15%)]">
+                                <Music className="w-4 h-4 text-[hsl(260,10%,60%)]" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="ml-3 flex-1 min-w-0">
+                            <h3 className="text-sm font-medium text-white truncate group-hover:text-[hsl(263,83%,70%)] transition-colors">
+                              {track.name}
+                            </h3>
+                            <p className="text-xs text-[hsl(260,10%,60%)] truncate">
+                              {track.artists.map(a => a.name).join(', ')}
+                            </p>
+                          </div>
+                          <div className="ml-2 text-xs text-[hsl(260,10%,60%)] whitespace-nowrap">
+                            {formatDuration(track.duration_ms)}
+                          </div>
                         </div>
-                        <div className="flex-shrink-0 ml-2 w-10 h-10 rounded overflow-hidden bg-[hsl(260,15%,15%)]">
-                          {track.album?.images?.[0]?.url ? (
+                      ))}
+                      {topTracks?.items && topTracks.items.length > 5 && (
+                        <button
+                          onClick={() => toggleSection('tracks')}
+                          className="w-full py-2 text-center text-sm font-medium text-[hsl(263,83%,70%)] hover:text-[hsl(263,83%,80%)] transition-colors mt-2"
+                        >
+                          {expandedSections.tracks ? 'Show Less' : `+${topTracks.items.length - 5} More`}
+                        </button>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Top Genres */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <Card className="bg-[hsl(260,15%,12%,0.8)] backdrop-blur-lg border-[hsl(260,15%,20%,0.5)]">
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <Hash className="h-5 w-5 text-[hsl(263,83%,60%)]" />
+                        <CardTitle className="text-lg font-semibold text-white">Top Genres</CardTitle>
+                      </div>
+                      <span className="text-xs text-[hsl(260,10%,60%)]">{timeRangeLabels[timeRange].display}</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                      {topGenres.slice(0, expandedSections.genres ? topGenres.length : 16).map((genre, index) => (
+                        <div key={genre} className="p-2 rounded-lg hover:bg-[hsl(260,15%,20%,0.3)] transition-colors group">
+                          <h3 className="text-sm font-medium text-white group-hover:text-[hsl(263,83%,70%)] transition-colors capitalize text-center">
+                            {genre}
+                          </h3>
+                        </div>
+                      ))}
+                    </div>
+                    {topGenres.length > 16 && (
+                      <button
+                        onClick={() => toggleSection('genres')}
+                        className="w-full py-2 text-center text-sm font-medium text-[hsl(263,83%,60%)] hover:text-[hsl(263,83%,70%)] transition-colors mt-4"
+                      >
+                        {expandedSections.genres ? 'Show Less' : `+${topGenres.length - 16} More`}
+                      </button>
+                    )}
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+
+
+              {/* Your Secret Song */}
+              {secretSong && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <Card className="bg-gradient-to-r from-[hsl(260,15%,12%,0.9)] to-[hsl(260,15%,15%,0.9)] backdrop-blur-lg border-[hsl(263,83%,60%,0.3)] relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[hsl(263,83%,60%,0.1)] to-[hsl(167,94%,43%,0.1)] opacity-50"></div>
+                    <CardHeader className="relative z-10">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className="relative">
+                            <Sparkles className="h-5 w-5 text-[hsl(263,83%,70%)] animate-pulse" />
+                            <div className="absolute inset-0 bg-[hsl(263,83%,70%)] rounded-full blur-sm opacity-30"></div>
+                          </div>
+                          <CardTitle className="text-lg font-semibold text-white">Your Secret Song</CardTitle>
+                        </div>
+                        <span className="text-xs text-[hsl(260,10%,60%)]">{timeRangeLabels[timeRange].display}</span>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="text-center mb-4">
+                        <p className="text-sm font-medium text-[hsl(263,83%,70%)] mb-2">
+                          {secretSong.message}
+                        </p>
+                      </div>
+                      <div className="flex items-center p-3 rounded-lg bg-[hsl(260,15%,20%,0.3)] hover:bg-[hsl(260,15%,25%,0.3)] transition-colors group">
+                        <div className="flex-shrink-0 w-12 h-12 rounded overflow-hidden bg-[hsl(260,15%,15%)]">
+                          {secretSong.track.album?.images?.[0]?.url ? (
                             <Image 
-                              src={track.album.images[0].url} 
-                              alt={track.album.name}
-                              width={64}
-                              height={64}
+                              src={secretSong.track.album.images[0].url} 
+                              alt={secretSong.track.album.name}
+                              width={48}
+                              height={48}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center bg-[hsl(260,15%,15%)]">
-                              <Music className="w-4 h-4 text-[hsl(260,10%,60%)]" />
+                              <Music className="w-5 h-5 text-[hsl(260,10%,60%)]" />
                             </div>
                           )}
                         </div>
                         <div className="ml-3 flex-1 min-w-0">
                           <h3 className="text-sm font-medium text-white truncate group-hover:text-[hsl(263,83%,70%)] transition-colors">
-                            {track.name}
+                            {secretSong.track.name}
                           </h3>
                           <p className="text-xs text-[hsl(260,10%,60%)] truncate">
-                            {track.artists.map(a => a.name).join(', ')}
+                            {secretSong.track.artists.map((a: any) => a.name).join(', ')}
                           </p>
                         </div>
                         <div className="ml-2 text-xs text-[hsl(260,10%,60%)] whitespace-nowrap">
-                          {formatDuration(track.duration_ms)}
+                          {formatDuration(secretSong.track.duration_ms)}
                         </div>
                       </div>
-                    ))}
-                    {topTracks?.items && topTracks.items.length > 5 && (
-                      <button
-                        onClick={() => toggleSection('tracks')}
-                        className="w-full py-2 text-center text-sm font-medium text-[hsl(263,83%,70%)] hover:text-[hsl(263,83%,80%)] transition-colors mt-2"
-                      >
-                        {expandedSections.tracks ? 'Show Less' : `+${topTracks.items.length - 5} More`}
-                      </button>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              )}
+            </div>
 
             {/* Top Artists */}
             <motion.div
@@ -410,7 +552,7 @@ export default function DashboardPage() {
                 <CardContent>
                   <div className="space-y-4">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                      {topArtists?.items?.slice(0, expandedSections.artists ? topArtists.items.length : 6).map(artist => (
+                      {topArtists?.items?.slice(0, expandedSections.artists ? topArtists.items.length : 9).map(artist => (
                         <a
                           key={artist.id}
                           href={artist.external_urls.spotify}
@@ -440,12 +582,12 @@ export default function DashboardPage() {
                         </a>
                       ))}
                     </div>
-                    {topArtists?.items && topArtists.items.length > 6 && (
+                    {topArtists?.items && topArtists.items.length > 9 && (
                       <button
                         onClick={() => toggleSection('artists')}
                         className="w-full py-2 text-center text-sm font-medium text-[hsl(167,94%,43%)] hover:text-[hsl(167,94%,53%)] transition-colors"
                       >
-                        {expandedSections.artists ? 'Show Less' : `+${topArtists.items.length - 6} More`}
+                        {expandedSections.artists ? 'Show Less' : `+${topArtists.items.length - 9} More`}
                       </button>
                     )}
                   </div>

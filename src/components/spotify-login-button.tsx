@@ -36,7 +36,8 @@ export default function SpotifyLoginButton({ className = '', size = 'lg' }: Spot
         'user-top-read',
         'user-read-recently-played',
         'user-read-private',
-        'user-read-email'
+        'user-read-email',
+        'user-read-playback-state'
       ];
 
       // Generate a random state parameter for CSRF protection
