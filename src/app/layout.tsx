@@ -7,7 +7,9 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Rebeat - Your Music, Visualized",
-  description: "Discover insights about your listening habits with beautiful visualizations",
+  description: "Discover insights about your Spotify listening habits, \
+   including top tracks, top artists, top genres, your underground song, \
+   and your most recently played song.",
 }
 
 export default function RootLayout({

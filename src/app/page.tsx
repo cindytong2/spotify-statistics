@@ -1,6 +1,5 @@
 "use client"
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
 import SpotifyLoginButton from "@/components/spotify-login-button"
 
 export default function Home() {
@@ -12,7 +11,7 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex items-center space-x-2">
-                <span className="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-[hsl(263,83%,70%)] to-[hsl(263,83%,80%)]">Spotify Statistics</span>
+                <span className="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-[hsl(263,83%,70%)] to-[hsl(263,83%,80%)]">Rebeat - Spotify Statistics</span>
               </div>
             </div>
             <SpotifyLoginButton className="h-9 px-4" />
@@ -70,7 +69,7 @@ export default function Home() {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className="text-xl md:text-2xl text-[hsl(260,10%,70%)] mb-10 max-w-2xl mx-auto leading-relaxed"
               >
-                Discover insights about your Spotify listening habits with beautiful, shareable visualizations.
+                Discover insights about your Spotify listening habits, including top tracks, artists, genres, and your secret underground song.
               </motion.p>
               
 <motion.div 
@@ -92,11 +91,6 @@ export default function Home() {
                 <div className="relative bg-[hsl(260,15%,10%,0.8)] backdrop-blur-sm border border-[hsl(260,15%,20%,0.5)] rounded-xl p-1">
                   <div className="h-64 md:h-80 bg-[hsl(260,15%,15%,0.3)] rounded-lg flex items-center justify-center">
                     <div className="text-center p-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-[hsl(263,83%,60%)] to-[hsl(263,83%,70%)] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/20">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-                        </svg>
-                      </div>
                       <h3 className="text-2xl font-semibold text-white mb-2">Your Music Awaits</h3>
                       <p className="text-[hsl(260,10%,70%)] text-sm max-w-xs mx-auto">Connect your Spotify account to unlock personalized insights</p>
                     </div>
