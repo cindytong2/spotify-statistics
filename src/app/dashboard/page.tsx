@@ -7,7 +7,7 @@ import { Loader2, Music, User, LogOut, Hash, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import AudioFeaturesRadar from '@/components/audio-features-radar';
+import MostRecentSong from '@/components/first-song';
 
 interface Artist {
   id: string;
@@ -24,6 +24,7 @@ interface Track {
   album: {
     images: Array<{ url: string }>;
     name: string;
+    release_date: string;
   };
   external_urls: { spotify: string };
   duration_ms: number;
@@ -587,23 +588,36 @@ export default function DashboardPage() {
                         <p className="text-xs text-[hsl(260,10%,60%)] truncate">
                           {secretSong.track.artists.map((a: any) => a.name).join(', ')}
                         </p>
-                      </div>
-                      <div className="ml-2 text-xs text-[hsl(260,10%,60%)] whitespace-nowrap">
-                        {formatDuration(secretSong.track.duration_ms)}
+                        <div className="flex items-center space-x-2 mt-1">
+                          <Loader2 className="w-3 h-3 text-[hsl(260,10%,60%)]" />
+                          <span className="text-xs text-[hsl(260,10%,60%)]">
+                            {formatDuration(secretSong.track.duration_ms)}
+                          </span>
+                        </div>
                       </div>
                     </div>
+                    {secretSong.track.album && (
+                      <div className="mt-3 text-center">
+                        <p className="text-xs text-[hsl(260,10%,60%)]">
+                          From <span className="text-[hsl(263,83%,70%)]">{secretSong.track.album.name}</span>
+                          {secretSong.track.album.release_date && (
+                            <span> • Released {new Date(secretSong.track.album.release_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                          )}
+                        </p>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </motion.div>
             )}
 
-            {/* Statistics */}
+            {/* Most Recent Song You Played */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
             >
-              <AudioFeaturesRadar timeRange={timeRange} />
+              <MostRecentSong timeRange={timeRange} />
             </motion.div>
           </div>
         </main>
