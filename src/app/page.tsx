@@ -72,11 +72,11 @@ export default function Home() {
                 Discover insights about your Spotify listening habits, including top tracks, artists, genres, and your secret underground song.
               </motion.p>
               
-<motion.div 
+              <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center"
+                className="flex flex-col sm:flex-row gap-4 justify-center w-full items-center"
               >
                 <SpotifyLoginButton size="lg" />
               </motion.div>
